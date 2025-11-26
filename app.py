@@ -1,29 +1,33 @@
 import streamlit as st
-from components.Home import home_page
-from components.ChatBox import chat_box
+from groq import Groq
 
-st.set_page_config(page_title="AFG Genius AI", layout="wide")
+st.set_page_config(page_title="AFG Genius AI", page_icon="🤖", layout="wide")
 
-# تب‌ها
-tabs = ["خانه", "چت‌بات", "تولید عکس", "تولید ویدیو", "تولید صدا", "کدنویسی", "ترجمه"]
-tab_choice = st.sidebar.radio("منو", tabs)
+# Load API key
+import os
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 
-if tab_choice == "خانه":
-    home_page()
-elif tab_choice == "چت‌بات":
-    chat_box()
-elif tab_choice == "تولید عکس":
-    st.header("تولید عکس")
-    st.info("به زودی با مدل FLUX.1 🔥")
-elif tab_choice == "تولید ویدیو":
-    st.header("تولید ویدیو")
-    st.info("به زودی با مدل Wan 2.2 🔥")
-elif tab_choice == "تولید صدا":
-    st.header("تولید صدا")
-    st.info("به زودی با Google TTS یا ElevenLabs 🔥")
-elif tab_choice == "کدنویسی":
-    st.header("کدنویسی / برنامه نویسی")
-    st.info("به زودی با Code Llama یا GPT-5 🔥")
-elif tab_choice == "ترجمه":
-    st.header("ترجمه زنده")
-    st.info("به زودی با Google Translate API 🔥")
+client = Groq(api_key=GROQ_API_KEY)
+
+st.title("🤖 AFG Genius - چت‌بات هوشمند")
+st.write("سهیل جان، پیام خود را بنویسید👇")
+
+# Chat UI
+user_input = st.text_input("پیام شما:")
+
+if st.button("ارسال"):
+    if user_input.strip() == "":
+        st.warning("لطفاً یک پیام بنویسید!")
+    else:
+        with st.spinner("در حال دریافت پاسخ از AI..."):
+            chat_completion = client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": "You are an intelligent helpful AI assistant."},
+                    {"role": "user", "content": user_input}
+                ],
+                model="llama-3.1-8b-instant"
+            )
+
+            ai_response = chat_completion.choices[0].message["content"]
+            st.success("پاسخ AI:")
+            st.write(ai_response)
