@@ -1,0 +1,9 @@
+streamlit>=1.26.0
+requests
+gTTS
+Pillow
+moviepy
+openai
+replicate
+python-dotenv
+bcrypt
