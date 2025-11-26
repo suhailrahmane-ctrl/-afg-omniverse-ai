@@ -1,0 +1,14 @@
+:root{
+  --bg:#f8f9fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#0f172a;
+  --accent-2:#0b84ff;
+}
+body { background: var(--bg); font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+.header { padding: 18px; text-align:left; }
+.site-title { font-size:20px; font-weight:700; color:var(--accent); }
+.card { background: var(--card); border-radius:10px; padding:12px; box-shadow: 0 6px 18px rgba(12,17,23,0.04); margin-bottom:12px; }
+.small { font-size:13px; color:var(--muted); }
+.btn { background:var(--accent-2); color:white; padding:8px 12px; border-radius:8px; border:none; }
+.footer { font-size:12px; color:var(--muted); margin-top:14px; text-align:center; }
