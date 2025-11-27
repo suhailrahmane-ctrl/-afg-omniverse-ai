@@ -1,10 +1,3 @@
-streamlit>=1.26.0
+streamlit==1.33.0
 requests
-gTTS
 Pillow
-moviepy
-openai
-replicate
-python-dotenv
-bcrypt
-groq
